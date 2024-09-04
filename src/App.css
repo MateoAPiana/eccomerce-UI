@@ -1,0 +1,25 @@
+h1 {
+  text-align: center;
+}
+
+.products_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.product {
+  max-width: 600px;
+  height: 750px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product h2 {
+  margin-bottom: 3px;
+}
+
+.product h3 {
+  margin: 5px;
+}
