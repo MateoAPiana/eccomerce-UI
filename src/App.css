@@ -9,8 +9,6 @@ h1 {
 }
 
 .product {
-  max-width: 600px;
-  height: 750px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

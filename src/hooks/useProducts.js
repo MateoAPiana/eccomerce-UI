@@ -6,12 +6,6 @@ const getProducts = async ({ offset }) => {
   const offsetToUse = offset ? offset : 0
   try {
     const products = await getProductsFromDatabase({ offset: offsetToUse })
-    products.map(p => {
-      fetch('https://random.imagecdn.app/150/150')
-        .then(res => res.blob())
-        .then(img => p.img = URL.createObjectURL(img).slice(5)
-        )
-    })
     return products
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -19,21 +13,26 @@ const getProducts = async ({ offset }) => {
 }
 
 export function useProducts() {
+  const [hasMoreProducts, setHasMoreProducts] = useState(1)
   const [products, setProducts] = useState([]);
   const [offset, setOffset] = useState(0)
   useEffect(() => {
     const fetchProducts = async () => {
       const products = await getProducts({ offset })
       setProducts(products)
-    };
+    }
 
     fetchProducts();
-  }, [offset]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const fetchMoreProducts = async () => {
-    setOffset(offset + 10)
-    const moreProducts = await getProducts({ offset })
-    setProducts(prevProducts => [...prevProducts, ...moreProducts])
+    if (hasMoreProducts) {
+      setOffset(offset + 10)
+      const moreProducts = await getProducts({ offset })
+      if (!moreProducts.length) setHasMoreProducts(0)
+      setProducts(prevProducts => [...prevProducts, ...moreProducts])
+    }
   }
 
   return { products, fetchMoreProducts }

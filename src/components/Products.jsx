@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useProducts } from "../hooks/useProducts"
-
 export function Products() {
   const { products, fetchMoreProducts } = useProducts()
 
@@ -17,19 +16,19 @@ export function Products() {
       observer.observe(lastProduct);
       return () => observer.unobserve(lastProduct);
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [products])
 
   return (
     <div className="products_container">
       {products?.map(product => (
-        <article className="product" key={product.id}>
-          <h2>{product.product_name}</h2>
-          <h3><b>Category</b> - {product.category}</h3>
-          <b>Price - ${product.price}</b>
-          <p>{product.product_description}</p>
+        <article className="product" key={product.ProductID}>
+          <h2>{product.ProductName}</h2>
+          <h3><b>Category</b> - {product.CategoryID}</h3>
+          <b>Price - ${product.Price}</b>
           {/* <img src={product.img} alt="" /> */}
-          <img src={'https://random.imagecdn.app/150/150'} alt="" />
+          {/* <img src={'https://random.imagecdn.app/150/150'} alt="" /> */}
         </article>
       ))}
     </div>
