@@ -22,11 +22,11 @@ export function Products() {
 
   return (
     <div className="products_container">
-      {products?.map(product => (
+      {products.error ? products.error : products?.map(product => (
         <article className="product" key={product.ProductID}>
           <h2>{product.ProductName}</h2>
-          <h3><b>Category</b> - {product.CategoryID}</h3>
-          <b>Price - ${product.Price}</b>
+          <h3>{product.category.CategoryName}</h3>
+          <b>Price - ${parseFloat(product.Price)}</b>
           {/* <img src={product.img} alt="" /> */}
           {/* <img src={'https://random.imagecdn.app/150/150'} alt="" /> */}
         </article>
